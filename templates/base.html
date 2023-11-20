@@ -25,7 +25,7 @@
       <a href="{% url 'index' %}"><img src="{% static 'images/logo-home.webp' %}" alt="Home logo" /></a>
 
       <nav class="main-nav">
-        <a class="main-action" href="oi">Projetos</a>
+        <a class="main-action" href="{% url 'projetos:index' %}">Projetos</a>
         <a class="main-action" href="{% url 'about' %}">Sobre</a>
         <a class="main-button" href="https://drive.google.com/file/d/1gzIujBgSGg678mIHOUijuhL_k4-x_pmp/view?usp=sharing" target="_blank">Download CV</a>
       </nav>

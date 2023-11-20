@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block title %}
+  {{ projeto.name }}
+{% endblock %} {% block content %}
+  <main class="template">
+    <h2 class="main-title -second">{{ projeto.name }} ({{ projeto.release_date }})</h2>
+    <h6>{{ projeto.description }} O projeto pode ser acessado <a href="{{ projeto.projeto_url }}" target="_blank">aqui</a>.</h6>
+  </main>
+{% endblock %}
