@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <title>
+      {% block title %}
+
+      {% endblock %}| Portfólio - Lucas Marques
+    </title>
+  </head>
+
+  <body>
+    <header class="main-header">
+      <a href="{% url 'index' %}"><img src="{% static 'images/logo-home.webp' %}" alt="Home logo" /></a>
+
+      <nav class="main-nav">
+        <a class="main-action" href="oi">Projetos</a>
+        <a class="main-action" href="{% url 'about' %}">Sobre</a>
+        <a class="main-button" href="https://drive.google.com/file/d/1gzIujBgSGg678mIHOUijuhL_k4-x_pmp/view?usp=sharing" target="_blank">Download CV</a>
+      </nav>
+    </header>
+    {% block content %}
+
+    {% endblock %}
+    <footer class="main-footer">
+      <a href="https://github.com/lucasmarques2003" target="_blank"><img src="{% static 'images/logo-github.png' %}" alt="logo do github" /></a>
+
+      <a href="mailto:lucas-marques2003@usp.br" target="_blank"><img src="{% static 'images/logo-gmail.webp' %}" alt="Logo do Gmail" /></a>
+    </footer>
+  </body>
+</html>
