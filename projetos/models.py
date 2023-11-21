@@ -5,7 +5,7 @@ from django.conf import settings
 
 class Post(models.Model):
     name = models.CharField(max_length=255)
-    release_date = models.DateTimeField(null=True)
+    release_date = models.DateTimeField(null=True,)
     projeto_url = models.URLField(max_length=200, null=True)
     description = models.TextField()
 

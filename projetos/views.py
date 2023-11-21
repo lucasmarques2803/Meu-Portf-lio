@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from .models import Post
-from .temp_data import projeto_data
+from .forms import PostForm
 
 def detail_projeto(request, projeto_id):
     projeto = get_object_or_404(Post, pk=projeto_id)
@@ -18,33 +18,47 @@ def list_projetos(request):
 
 def create_projeto(request):
     if request.method == 'POST':
-        projeto_name = request.POST['name']
-        projeto_release_date = request.POST['release_date']
-        projeto_url = request.POST['projeto_url']
-        projeto_description = request.POST['description']
-        projeto = Post(name=projeto_name,
-                       release_date=projeto_release_date,
-                       projeto_url=projeto_url,
-                       description=projeto_description)
-        projeto.save()
-        return HttpResponseRedirect(
-            reverse('projetos:detail', args=(projeto.id, )))
+        form = PostForm(request.POST)
+        if form.is_valid():
+            projeto_name = form.cleaned_data['name']
+            projeto_release_date = form.cleaned_data['release_date']
+            projeto_url = form.cleaned_data['projeto_url']
+            projeto_description = form.cleaned_data['description']
+            projeto = Post(name=projeto_name,
+                          release_date=projeto_release_date,
+                          projeto_url=projeto_url,
+                          description=projeto_description)
+            projeto.save()
+            return HttpResponseRedirect(
+                reverse('projetos:detail', args=(projeto.id, )))
     else:
-        return render(request, 'projetos/create.html', {})
+        form = PostForm()
+    context = {'form': form}
+    return render(request, 'projetos/create.html', context)
     
 def update_projeto(request, projeto_id):
     projeto = get_object_or_404(Post, pk=projeto_id)
 
-    if request.method == 'POST':
-        projeto.name = request.POST['name']
-        projeto.release_date = request.POST['release_date']
-        projeto.projeto_url = request.POST['projeto_url']
-        projeto.description = request.POST['description']
-        projeto.save()
-        return HttpResponseRedirect(
-            reverse('projetos:detail', args=(projeto.id, )))
-    
-    context = {'projeto': projeto}
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            projeto.name = form.cleaned_data['name']
+            projeto.release_date = form.cleaned_data['release_date']
+            projeto.projeto_url = form.cleaned_data['projeto_url']
+            projeto.description = form.cleaned_data['description']
+            projeto.save()
+            return HttpResponseRedirect(
+                reverse('projetos:detail', args=(projeto.id, )))
+    else:
+        form = PostForm(
+            initial={
+                'name': projeto.name,
+                'release_date': projeto.release_date,
+                'projeto_url': projeto.projeto_url,
+                'description': projeto.description,
+            })
+
+    context = {'projeto': projeto, 'form': form}
     return render(request, 'projetos/update.html', context)
     
 def delete_projeto(request, projeto_id):

@@ -3,22 +3,7 @@
     <h2 class="main-title -second">Inserir Novo Projeto</h2>
     <form method="POST" action="{% url 'projetos:create' %}">
       {% csrf_token %}
-      <p>
-        <label for="id_name">Título:</label>
-        <input type="text" name="name" id="id_name" />
-      </p>
-      <p>
-        <label for="id_release_date">Data de Lançamento:</label>
-        <input type="datetime-local" name="release_date" id="id_release_date" />
-      </p>
-      <p>
-        <label for="id_projeto_url">URL do projeto:</label>
-        <input type="url" name="projeto_url" id="id_projeto_url" />
-      </p>
-      <p>
-        <label for="id_description">Descrição do projeto:</label>
-        <input type="text" name="description" id="id_description" />
-      </p>
+      {{ form.as_p }}
       <button type="submit">Criar</button>
     </form>
   </main>
