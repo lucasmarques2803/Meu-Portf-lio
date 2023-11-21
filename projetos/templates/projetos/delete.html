@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+  <main class="template">
+    <form method="POST" action="{% url 'projetos:delete' projeto.id %}">
+      {% csrf_token %}
+      <h6>Você tem certeza que deseja apagar o projeto "{{ projeto.name }} ({{ projeto.release_date|date:"d/m/Y" }})"?</h6>
+      <button type="submit">Apagar</button>
+    </form>
+  </main>
+{% endblock %}

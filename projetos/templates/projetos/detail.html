@@ -2,7 +2,11 @@
   {{ projeto.name }}
 {% endblock %} {% block content %}
   <main class="template">
-    <h2 class="main-title -second">{{ projeto.name }} ({{ projeto.release_date }})</h2>
-    <h6>{{ projeto.description }} O projeto pode ser acessado <a href="{{ projeto.projeto_url }}" target="_blank">aqui</a>.</h6>
+    <h2 class="main-title -second">{{ projeto.name }} ({{ projeto.release_date|date:'d/m/Y' }})</h2>
+    <ul>
+        <li><a href="{% url 'projetos:update' projeto.id %}" class="main-action -second">Editar</a></li>
+        <li><a href="{% url 'projetos:delete' projeto.id %}" class="main-action -second">Apagar</a></li>
+    </ul>
+    <h6>{{ projeto.description|safe }} O projeto pode ser acessado <a href="{{ projeto.projeto_url }}" target="_blank">aqui</a>.</h6>
   </main>
 {% endblock %}

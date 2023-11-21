@@ -6,7 +6,7 @@
       <ul>
         {% for projeto in projeto_list %}
           <li>
-            <a href="{% url 'projetos:detail' forloop.counter %}" class="main-action -second">{{ projeto.name }}</a>
+            <a href="{% url 'projetos:detail' projeto.id %}" class="main-action -second">{{ projeto.name }}</a>
           </li>
         {% endfor %}
       </ul>
