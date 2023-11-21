@@ -2,11 +2,11 @@
   <main class="template">
     <h2 class="main-title -second">Projetos</h2>
     <a href="{% url 'projetos:create' %}">Adicionar Novo Projeto</a>
-    {% if projeto_list %}
+    {% if post_list %}
       <ul>
-        {% for projeto in projeto_list %}
+        {% for post in post_list %}
           <li>
-            <a href="{% url 'projetos:detail' projeto.id %}" class="main-action -second">{{ projeto.name }}</a>
+            <a href="{% url 'projetos:detail' post.id %}" class="main-action -second">{{ post.name }}</a>
           </li>
         {% endfor %}
       </ul>

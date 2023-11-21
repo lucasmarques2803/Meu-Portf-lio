@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
   <main class="template">
-    <h2 class="main-title -second">Atualizar Dados do Projeto {{ projeto.name }} ({{ projeto.release_date|date:"d/m/Y" }})</h2>
-    <form method="POST" action="{% url 'projetos:update' projeto.id %}">
+    <h2 class="main-title -second">Atualizar Dados do Projeto {{ post.name }} ({{ post.release_date|date:"d/m/Y" }})</h2>
+    <form method="POST" action="{% url 'projetos:update' post.id %}">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Atualizar</button>
