@@ -11,3 +11,16 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.release_date})'
+    
+class Comment(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE)
+    text = models.CharField(max_length=255)
+    projeto = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-date',]
+
+    def __str__(self):
+        return f'"{self.text}" - {self.author.username}'

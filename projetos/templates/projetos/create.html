@@ -4,7 +4,7 @@
     <form method="POST" action="{% url 'projetos:create' %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Criar</button>
+      <button type="submit" class="main-button -second">Criar</button>
     </form>
   </main>
 {% endblock %}

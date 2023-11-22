@@ -1,8 +1,10 @@
 from multiprocessing import context
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -34,3 +36,21 @@ class PostDeleteView(generic.DeleteView):
 
     def get_success_url(self) -> str:
         return reverse('projetos:index')
+
+def create_comment(request, projeto_id):
+    projeto = get_object_or_404(Post, pk=projeto_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_author = form.cleaned_data['author']
+            comment_text = form.cleaned_data['text']
+            comment = Comment(author=comment_author,
+                            text=comment_text,
+                            projeto=projeto)
+            comment.save()
+            return HttpResponseRedirect(
+                reverse('projetos:detail', args=(projeto_id, )))
+    else:
+        form = CommentForm()
+    context = {'form': form, 'projeto': projeto}
+    return render(request, 'projetos/comment.html', context)

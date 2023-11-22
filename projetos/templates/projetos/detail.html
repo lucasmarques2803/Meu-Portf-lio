@@ -1,12 +1,38 @@
 {% extends 'base.html' %} {% block title %}
   {{ post.name }}
 {% endblock %} {% block content %}
-  <main class="template">
-    <h2 class="main-title -second">{{ post.name }} ({{ post.release_date|date:'d/m/Y' }})</h2>
-    <ul>
-        <li><a href="{% url 'projetos:update' post.id %}" class="main-action -second">Editar</a></li>
-        <li><a href="{% url 'projetos:delete' post.id %}" class="main-action -second">Apagar</a></li>
-    </ul>
-    <h6>{{ post.description|safe }} O projeto pode ser acessado <a href="{{ post.projeto_url }}" target="_blank">aqui</a>.</h6>
+  <main>
+    <section class="template">
+      <h2 class="main-title -second">{{ post.name }} ({{ post.release_date|date:'d/m/Y' }})</h2>
+      <ul>
+        <li>
+          <a href="{% url 'projetos:update' post.id %}" class="main-action -second">Editar</a>
+        </li>
+        <li>
+          <a href="{% url 'projetos:delete' post.id %}" class="main-action -second">Apagar</a>
+        </li>
+      </ul>
+      <h6>{{ post.description|safe }} O projeto pode ser acessado <a href="{{ post.projeto_url }}" target="_blank">aqui</a>.</h6>
+    </section>
+    <section class="template -second">
+      <h2 class="main-title -second">Comentários</h2>
+      <ul>
+        <li class="comentar">
+          <a href="{% url 'projetos:comment' post.id %}" class="main-button">Comentar</a>
+        </li>
+        {% if post.comment_set.all %}
+          {% for comment in post.comment_set.all %}
+            <figure>
+              <figcaption>
+                <strong>{{ comment.author }}</strong> ({{ comment.date|date:'d/m/Y' }})
+              </figcaption>
+              <blockquote>"{{ comment.text }}"</blockquote>
+            </figure>
+          {% endfor %}
+        {% else %}
+          <h6>Ainda não existe nenhuma resenha para este filme.</h6>
+        {% endif %}
+      </ul>
+    </section>
   </main>
 {% endblock %}

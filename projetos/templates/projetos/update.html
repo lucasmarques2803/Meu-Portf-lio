@@ -4,7 +4,7 @@
     <form method="POST" action="{% url 'projetos:update' post.id %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Atualizar</button>
+      <button type="submit" class="main-button -second">Atualizar</button>
     </form>
   </main>
 {% endblock %}

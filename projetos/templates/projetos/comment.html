@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+  <main class="template">
+    <h2 class="main-title -second">Comentar Projeto {{ projeto.name }} ({{ projeto.release_date|date:"d/m/Y"}})</h2>
+    <form method="POST" action="{% url 'projetos:comment' projeto.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <a href="{% url 'projetos:detail' projeto.id %} " class="main-button -second">Cancelar</a>
+      <button type="submit" class="main-button -second">Postar Comentário</button>
+    </form>
+  </main>
+{% endblock %}
