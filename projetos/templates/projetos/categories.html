@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+  <main class="template">
+    <h2 class="main-title -second">Categorias de Projetos</h2>
+    {% if category_list %}
+      <ul>
+        {% for category in category_list %}
+          <li>
+            <a href="{% url 'projetos:category' category.id %}" class="main-action -second">{{ category.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Não foi encontrada nenhuma categoria.</p>
+    {% endif %}
+  </main>
+{% endblock %}

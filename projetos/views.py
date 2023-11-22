@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import PostForm, CommentForm
 
 class PostDetailView(generic.DetailView):
@@ -54,3 +54,11 @@ def create_comment(request, projeto_id):
         form = CommentForm()
     context = {'form': form, 'projeto': projeto}
     return render(request, 'projetos/comment.html', context)
+
+class CategoryListView(generic.ListView):
+    model = Category
+    template_name = 'projetos/categories.html'
+
+class CategoryDetailView(generic.DetailView):
+    model = Category
+    template_name = 'projetos/category.html'
