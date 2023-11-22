@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 from .models import Post, Comment
 
@@ -16,6 +17,7 @@ class PostForm(ModelForm):
             'projeto_url': 'URL do Projeto',
             'description': 'Descrição',
         }
+        widgets = {'release_date': forms.DateInput(attrs={'type':'date'})}
 
 class CommentForm(ModelForm):
     class Meta:
