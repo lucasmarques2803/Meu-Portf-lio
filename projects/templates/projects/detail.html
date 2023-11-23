@@ -1,24 +1,24 @@
 {% extends 'base.html' %} {% block title %}
-  {{ post.name }}
+  {{ project.name }}
 {% endblock %} {% block content %}
   <main>
     <section class="template">
-      <h2 class="main-title -second">{{ post.name }} ({{ post.release_date|date:'d/m/Y' }})</h2>
+      <h2 class="main-title -second">{{ project.name }} ({{ project.release_date|date:'d/m/Y' }})</h2>
       <ul>
         <li>
-          <a href="{% url 'projetos:update' post.id %}" class="main-action -second">Editar</a>
+          <a href="{% url 'projects:update' project.id %}" class="main-action -second">Editar</a>
         </li>
         <li>
-          <a href="{% url 'projetos:delete' post.id %}" class="main-action -second">Apagar</a>
+          <a href="{% url 'projects:delete' project.id %}" class="main-action -second">Apagar</a>
         </li>
       </ul>
-      <h6>{{ post.description|safe }} O projeto pode ser acessado <a href="{{ post.projeto_url }}" target="_blank">aqui</a>.</h6>
-      {% if post.category_set.all %}
+      <h6>{{ project.description|safe }} O projeto pode ser acessado <a href="{{ project.project_url }}" target="_blank">aqui</a>.</h6>
+      {% if project.category_set.all %}
         <h6>Faz parte da(s) categoria(s):</h6>
         <ul>
-          {% for category in post.category_set.all %}
+          {% for category in project.category_set.all %}
             <li>
-              <a href="{% url 'projetos:category' category.id %}" class="main-action -second">{{ category.name }}</a>
+              <a href="{% url 'projects:category' category.id %}" class="main-action -second">{{ category.name }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -28,10 +28,10 @@
       <h2 class="main-title -second">Comentários</h2>
       <ul>
         <li class="comentar">
-          <a href="{% url 'projetos:comment' post.id %}" class="main-button">Comentar</a>
+          <a href="{% url 'projects:comment' project.id %}" class="main-button">Comentar</a>
         </li>
-        {% if post.comment_set.all %}
-          {% for comment in post.comment_set.all %}
+        {% if project.comment_set.all %}
+          {% for comment in project.comment_set.all %}
             <figure>
               <figcaption>
                 <strong>{{ comment.author }}</strong> ({{ comment.date|date:'d/m/Y' }})

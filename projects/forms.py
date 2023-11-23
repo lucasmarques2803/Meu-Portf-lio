@@ -1,20 +1,20 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post, Comment
+from .models import Project, Comment
 
-class PostForm(ModelForm):
+class ProjectForm(ModelForm):
     class Meta:
-        model = Post
+        model = Project
         fields = [
             'name',
             'release_date',
-            'projeto_url',
+            'project_url',
             'description',
         ]
         labels = {
             'name': 'Título',
             'release_date': 'Data de Lançamento',
-            'projeto_url': 'URL do Projeto',
+            'project_url': 'URL do Projeto',
             'description': 'Descrição',
         }
         widgets = {'release_date': forms.DateInput(attrs={'type':'date'})}

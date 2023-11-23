@@ -5,7 +5,7 @@
       <ul>
         {% for category in category_list %}
           <li>
-            <a href="{% url 'projetos:category' category.id %}" class="main-action -second">{{ category.name }}</a>
+            <a href="{% url 'projects:category' category.id %}" class="main-action -second">{{ category.name }}</a>
           </li>
         {% endfor %}
       </ul>

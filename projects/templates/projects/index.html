@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% block content %}
   <main class="template">
     <h2 class="main-title -second">Projetos</h2>
-    <a href="{% url 'projetos:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
-    {% if post_list %}
+    <a href="{% url 'projects:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
+    {% if project_list %}
       <ul>
-        {% for post in post_list %}
+        {% for project in project_list %}
           <li>
-            <a href="{% url 'projetos:detail' post.id %}" class="main-action -second">{{ post.name }}</a>
+            <a href="{% url 'projects:detail' project.id %}" class="main-action -second">{{ project.name }}</a>
           </li>
         {% endfor %}
       </ul>

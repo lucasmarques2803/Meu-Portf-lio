@@ -2,11 +2,11 @@
   <main class="template">
     <h2 class="main-title -second">{{ category.name }}</h2>
     <h6>{{ category.description }}</h6>
-    {% if category.projetos.all %}
+    {% if category.projects.all %}
       <ul>
-        {% for post in category.projetos.all %}
+        {% for project in category.projects.all %}
           <li>
-            <a href="{% url 'projetos:detail' post.id %}" class="main-action -second">{{ post.name }} ({{ post.release_date|date:'d/m/Y' }})</a>
+            <a href="{% url 'projects:detail' project.id %}" class="main-action -second">{{ project.name }} ({{ project.release_date|date:'d/m/Y' }})</a>
           </li>
         {% endfor %}
       </ul>
