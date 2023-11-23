@@ -1,6 +1,5 @@
 from multiprocessing import context
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from .models import Project, Comment, Category
@@ -36,24 +35,19 @@ class ProjectDeleteView(generic.DeleteView):
 
     def get_success_url(self) -> str:
         return reverse('projects:index')
+    
+class CommentCreateView(generic.CreateView):
+    model = Comment
+    template_name = 'projects/comment.html'
+    form_class = CommentForm
 
-def create_comment(request, project_id):
-    project = get_object_or_404(Project, pk=project_id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment_author = form.cleaned_data['author']
-            comment_text = form.cleaned_data['text']
-            comment = Comment(author=comment_author,
-                            text=comment_text,
-                            project=project)
-            comment.save()
-            return HttpResponseRedirect(
-                reverse('projects:detail', args=(project_id, )))
-    else:
-        form = CommentForm()
-    context = {'form': form, 'project': project}
-    return render(request, 'projects/comment.html', context)
+    def get_success_url(self) -> str:
+        return reverse('projects:detail', args=(self.object.project.id, ))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = get_object_or_404(Project, pk=self.kwargs['pk'])
+        return context
 
 class CategoryListView(generic.ListView):
     model = Category

@@ -9,7 +9,7 @@ urlpatterns = [
     path('update/<int:pk>/', views.ProjectUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='delete'),
     path('<int:pk>/', views.ProjectDetailView.as_view(), name='detail'),
-    path('<int:project_id>/comment/', views.create_comment, name='comment'),
+    path('<int:pk>/comment/', views.CommentCreateView.as_view(), name='comment'),
     path('categories/', views.CategoryListView.as_view(), name='categories'),
     path('categories/<int:pk>/', views.CategoryDetailView.as_view(), name='category'),
 ]
