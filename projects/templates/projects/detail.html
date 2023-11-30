@@ -46,6 +46,13 @@
               {% if user.is_authenticated and user.username == comment.author.username %}
                 <a href="{% url 'projects:comment_update' comment.id %}">Editar</a>
               {% endif %}
+              {% if user.is_authenticated and user_belongs_to_moderators or user.username == comment.author.username %}
+                <button type="button" onclick="confirmDelete('{{ comment.id }}')">Apagar</button>
+                <form method="post" action="{% url 'projects:detail' project.id %}" class="delete-comment-form -comment-{{ comment.id }}">
+                  {% csrf_token %}
+                  <input type="hidden" name="delete_comment_id" value="{{ comement.id }}" />
+                </form>
+              {% endif %}
             </li>
           {% endfor %}
         {% else %}
@@ -54,4 +61,14 @@
       </ul>
     </section>
   </main>
+
+  <script>
+    function confirmDelete(commentId) {
+      const result = confirm('Tem certeza que deseja apagar este comentário?')
+      if (result) {
+        const form = document.querySelector('.delete-comment-form.-comment-' + commentId)
+        form.submit()
+      }
+    }
+  </script>
 {% endblock %}

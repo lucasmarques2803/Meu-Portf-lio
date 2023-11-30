@@ -20,6 +20,12 @@ class ProjectDetailView(generic.DetailView):
         if len(request.session['last_projects']) > 5:
             request.session['last_projects'] = request.session['last_projects'][:-1]
         return super().get(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["user_belongs_to_moderators"] = self.request.user.groups.filter(name="moderators").exists()
+        
+        return context
 
 class ProjectListView(generic.ListView):
     model = Project
