@@ -12,12 +12,13 @@ class ProjectDetailView(generic.DetailView):
     template_name = 'projects/detail.html'
 
     def get(self, request, *args, **kwargs):
-        if 'last_viewed' not in request.session:
-            request.session['last_viewed'] = []
-        if self.get_object().id not in request.session['last_viewed']:
-            request.session['last_viewed'] = [self.get_object().id] + request.session['last_viewed']
-        if len(request.session['last_viewed']) > 5:
-            request.session['last_viewed'] = request.session['last_viewed'][:-1]
+        if 'last_projects' not in request.session:
+            request.session['last_projects'] = []
+        if self.get_object().id in request.session['last_projects']:
+            request.session["last_projects"].remove(self.get_object().id)
+        request.session['last_projects'] = [self.get_object().id] + request.session['last_projects']
+        if len(request.session['last_projects']) > 5:
+            request.session['last_projects'] = request.session['last_projects'][:-1]
         return super().get(request, *args, **kwargs)
 
 class ProjectListView(generic.ListView):
@@ -27,9 +28,9 @@ class ProjectListView(generic.ListView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
-        if "last_viewed" in self.request.session:
+        if "last_projects" in self.request.session:
             context['last_projects'] = []
-            for project_id in self.request.session['last_viewed']:
+            for project_id in self.request.session['last_projects']:
                 context['last_projects'].append(get_object_or_404(Project, pk=project_id))
         
         return context
@@ -75,6 +76,26 @@ class CategoryListView(generic.ListView):
     model = Category
     template_name = 'projects/categories.html'
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+
+        if "last_categories" in self.request.session:
+            context['last_categories'] = []
+            for category_id in self.request.session['last_categories']:
+                context['last_categories'].append(get_object_or_404(Category, pk=category_id))
+        
+        return context
+
 class CategoryDetailView(generic.DetailView):
     model = Category
     template_name = 'projects/category.html'
+
+    def get(self, request, *args, **kwargs):
+        if 'last_categories' not in request.session:
+            request.session['last_categories'] = []
+        if self.get_object().id in request.session['last_categories']:
+            request.session["last_categories"].remove(self.get_object().id)
+        request.session['last_categories'] = [self.get_object().id] + request.session['last_categories']
+        if len(request.session['last_categories']) > 5:
+            request.session['last_categories'] = request.session['last_categories'][:-1]
+        return super().get(request, *args, **kwargs)

@@ -1,16 +1,30 @@
 {% extends 'base.html' %} {% block content %}
-  <main class="template">
-    <h2 class="main-title -second">Categorias de Projetos</h2>
-    {% if category_list %}
-      <ul>
-        {% for category in category_list %}
-          <li>
-            <a href="{% url 'projects:category' category.id %}" class="main-action -second">{{ category.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>Não foi encontrada nenhuma categoria.</p>
+  <main>
+    <section class="template">
+      <h2 class="main-title -second">Categorias de Projetos</h2>
+      {% if category_list %}
+        <ul>
+          {% for category in category_list %}
+            <li>
+              <a href="{% url 'projects:category' category.id %}" class="main-action -second">{{ category.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Não foi encontrada nenhuma categoria.</p>
+      {% endif %}
+    </section>
+    {% if last_categories %}
+      <section class="template -second">
+        <h2 class="main-title -second">Ultimos Vistos</h2>
+        <ul>
+          {% for last_category in last_categories %}
+            <li>
+              <a href="{% url 'projects:category' last_category.id %}" class="main-action">{{ last_category.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
     {% endif %}
   </main>
 {% endblock %}
