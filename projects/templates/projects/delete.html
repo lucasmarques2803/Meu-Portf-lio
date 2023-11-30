@@ -1,8 +1,12 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}
+  Apagar projeto {{ project.name }}
+{% endblock %}
+{% block content %}
   <main class="template">
     <form method="POST" action="{% url 'projects:delete' project.id %}">
       {% csrf_token %}
-      <h6>Você tem certeza que deseja apagar o projeto "{{ project.name }} ({{ project.release_date|date:"d/m/Y" }})"?</h6>
+      <h6>Você tem certeza que deseja apagar o projeto "{{ project.name }} ({{ project.release_date|date:'d/m/Y' }})"?</h6>
       <button type="submit" class="main-button -second">Apagar</button>
     </form>
   </main>

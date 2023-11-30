@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+  Editar Comentário
+{% endblock %}
+{% block content %}
+  <main class="template">
+    <h2 class="main-title -second">Editar Comentário</h2>
+    <form method="POST" action="{% url 'projects:comment_update' comment.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <a href="{% url 'projects:detail' project.id %} " class="main-button -second">Cancelar</a>
+      <button type="submit" class="main-button -second">Editar Comentário</button>
+    </form>
+  </main>
+{% endblock %}

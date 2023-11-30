@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='delete'),
     path('<int:pk>/', views.ProjectDetailView.as_view(), name='detail'),
     path('<int:pk>/comment/', views.CommentCreateView.as_view(), name='comment'),
+    path('comments/<int:pk>', views.CommentUpdateView.as_view(), name='comment_update'),
     path('categories/', views.CategoryListView.as_view(), name='categories'),
     path('categories/<int:pk>/', views.CategoryDetailView.as_view(), name='category'),
 ]

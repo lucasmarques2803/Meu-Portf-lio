@@ -1,8 +1,14 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}
+  Projetos
+{% endblock %}
+{% block content %}
   <main>
     <section class="template">
       <h2 class="main-title -second">Projetos</h2>
-      <a href="{% url 'projects:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
+      {% if perms.projects.add_project %}
+        <a href="{% url 'projects:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
+      {% endif %}
       {% if project_list %}
         <ul>
           {% for project in project_list %}

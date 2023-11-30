@@ -1,6 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}
+  Comentar Projeto {{ project.name }}
+{% endblock %}
+{% block content %}
   <main class="template">
-    <h2 class="main-title -second">Comentar Projeto {{ project.name }} ({{ project.release_date|date:"d/m/Y"}})</h2>
+    <h2 class="main-title -second">Comentar Projeto {{ project.name }} ({{ project.release_date|date:'d/m/Y' }})</h2>
     <form method="POST" action="{% url 'projects:comment' project.id %}">
       {% csrf_token %}
       {{ form.as_p }}

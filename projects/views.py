@@ -44,22 +44,24 @@ class ProjectCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.Cre
     def get_success_url(self) -> str:
         return reverse('projects:detail', args=(self.object.id, ))
     
-class ProjectUpdateView(generic.UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
     model = Project
     template_name = 'projects/update.html'
     form_class = ProjectForm
+    permission_required = 'projects.change_project'
 
     def get_success_url(self) -> str:
         return reverse('projects:detail', args=(self.object.id, ))
 
-class ProjectDeleteView(generic.DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = Project
     template_name = 'projects/delete.html'
+    permission_required = 'projects.delete_project'
 
     def get_success_url(self) -> str:
         return reverse('projects:index')
     
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Comment
     template_name = 'projects/comment.html'
     form_class = CommentForm
@@ -76,6 +78,24 @@ class CommentCreateView(generic.CreateView):
         form.instance.author = self.request.user
         form.instance.project = get_object_or_404(Project, pk=self.kwargs['pk'])
         return super().form_valid(form)
+    
+class CommentUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
+    model = Comment
+    template_name = 'projects/comment_update.html'
+    form_class = CommentForm
+    permission_required = 'projects.change_comentario'
+
+    def has_permission(self) -> bool:
+        return super().has_permission() and self.request.user == self.get_object().author
+
+    def get_success_url(self):
+        return reverse('projects:detail', args=(self.object.project.id,))
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["project"] = self.object.project
+        
+        return context
 
 class CategoryListView(generic.ListView):
     model = Category

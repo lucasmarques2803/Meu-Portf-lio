@@ -1,17 +1,21 @@
-{% extends 'base.html' %} {% block title %}
+{% extends 'base.html' %}
+{% block title %}
   {{ project.name }}
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
   <main>
     <section class="template">
       <h2 class="main-title -second">{{ project.name }} ({{ project.release_date|date:'d/m/Y' }})</h2>
-      <ul>
-        <li>
-          <a href="{% url 'projects:update' project.id %}" class="main-action -second">Editar</a>
-        </li>
-        <li>
-          <a href="{% url 'projects:delete' project.id %}" class="main-action -second">Apagar</a>
-        </li>
-      </ul>
+      {% if perms.projects.change_project and perms.projects.delete_project %}
+        <ul>
+          <li>
+            <a href="{% url 'projects:update' project.id %}" class="main-action -second">Editar</a>
+          </li>
+          <li>
+            <a href="{% url 'projects:delete' project.id %}" class="main-action -second">Apagar</a>
+          </li>
+        </ul>
+      {% endif %}
       <h6>{{ project.description|safe }} O projeto pode ser acessado <a href="{{ project.project_url }}" target="_blank">aqui</a>.</h6>
       {% if project.category_set.all %}
         <h6>Faz parte da(s) categoria(s):</h6>
@@ -32,12 +36,17 @@
         </li>
         {% if project.comment_set.all %}
           {% for comment in project.comment_set.all %}
-            <figure>
-              <figcaption>
-                <strong>{{ comment.author }}</strong> ({{ comment.date|date:'d/m/Y' }})
-              </figcaption>
-              <blockquote>"{{ comment.text }}"</blockquote>
-            </figure>
+            <li>
+              <figure>
+                <figcaption>
+                  <strong>{{ comment.author }}</strong> ({{ comment.date|date:'d/m/Y' }})
+                </figcaption>
+                <blockquote>"{{ comment.text }}"</blockquote>
+              </figure>
+              {% if user.is_authenticated and user.username == comment.author.username %}
+                <a href="{% url 'projects:comment_update' comment.id %}">Editar</a>
+              {% endif %}
+            </li>
           {% endfor %}
         {% else %}
           <h6>Ainda não existe nenhum comentário para o projeto.</h6>
