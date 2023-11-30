@@ -28,8 +28,12 @@
         <a class="main-action" href="{% url 'projects:categories' %}">Categorias</a>
         <a class="main-action" href="{% url 'projects:index' %}">Projetos</a>
         <a class="main-action" href="{% url 'about' %}">Sobre</a>
-        <a class="main-button" href="https://drive.google.com/file/d/1gzIujBgSGg678mIHOUijuhL_k4-x_pmp/view?usp=sharing" target="_blank">Download CV</a>
       </nav>
+      {% if user.is_authenticated %}
+            <a class="main-button" href="{% url 'logout' %}" lang="en">Logout</a>
+        {% else %}
+            <a class="main-button" href="{% url 'login' %}" lang="en">Login</a>
+        {% endif %}
     </header>
     {% block content %}
 

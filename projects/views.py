@@ -71,6 +71,11 @@ class CommentCreateView(generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['project'] = get_object_or_404(Project, pk=self.kwargs['pk'])
         return context
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.project = get_object_or_404(Project, pk=self.kwargs['pk'])
+        return super().form_valid(form)
 
 class CategoryListView(generic.ListView):
     model = Category
