@@ -5,24 +5,26 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" action="{% url 'login' %}">
-    <h1 class="login_h1">Login de Usuário</h1>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" value="login" class="login_signin_button">Entrar</button>
-    <input type="hidden" name="next" value="{{ next }}" />
-    <p class="login">Não possui usuário?</p>
-    <a class="login_button" href="{% url 'signup' %}">Cadastre-se</a>
-    {% if form.errors %}
-      <p class="login">Sua senha e nome de usuário não correspondem. Tente novamente.</p>
-    {% endif %}
-
-    {% if next %}
-      {% if user.is_authenticated %}
-        <p class="login">Sua conta não possui acesso a esta página. Para prosseguir, faça um login com uma conta que tenha.</p>
-      {% else %}
-        <p class="login">Faça o login para ver esta página.</p>
+  <main class="template">
+    <h2 class="main-title -second">Login de Usuário</h2>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" value="login" class="main-button -second">Entrar</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p class="login">Não possui usuário?</p>
+      <a class="main-button -second" href="{% url 'signup' %}">Cadastre-se</a>
+      {% if form.errors %}
+        <p class="login">Sua senha e nome de usuário não correspondem. Tente novamente.</p>
       {% endif %}
-    {% endif %}
-  </form>
+
+      {% if next %}
+        {% if user.is_authenticated %}
+          <p class="login">Sua conta não possui acesso a esta página. Para prosseguir, faça um login com uma conta que tenha.</p>
+        {% else %}
+          <p class="login">Faça o login para ver esta página.</p>
+        {% endif %}
+      {% endif %}
+    </form>
+  </main>
 {% endblock %}

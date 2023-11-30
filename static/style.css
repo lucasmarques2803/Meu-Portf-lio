@@ -203,6 +203,14 @@ figcaption strong {
     gap: 1rem;
 }
 
+.helptext {
+    display: none;
+  }
+
+.signup-form>ul {
+    display: none;
+}
+
 @media only screen and (max-width: 720px) {
     :root {
         font-size: 16px;
