@@ -1,17 +1,31 @@
 {% extends 'base.html' %} {% block content %}
-  <main class="template">
-    <h2 class="main-title -second">Projetos</h2>
-    <a href="{% url 'projects:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
-    {% if project_list %}
-      <ul>
-        {% for project in project_list %}
-          <li>
-            <a href="{% url 'projects:detail' project.id %}" class="main-action -second">{{ project.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>Não foi encontrado nenhum projeto.</p>
+  <main>
+    <section class="template">
+      <h2 class="main-title -second">Projetos</h2>
+      <a href="{% url 'projects:create' %}" class="main-button -second">Adicionar Novo Projeto</a>
+      {% if project_list %}
+        <ul>
+          {% for project in project_list %}
+            <li>
+              <a href="{% url 'projects:detail' project.id %}" class="main-action -second">{{ project.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Não foi encontrado nenhum projeto.</p>
+      {% endif %}
+    </section>
+    {% if last_projects %}
+      <section class="template -second">
+        <h2 class="main-title -second">Ultimos Vistos</h2>
+        <ul>
+          {% for last_project in last_projects %}
+            <li>
+              <a href="{% url 'projects:detail' last_project.id %}" class="main-action">{{ last_project.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
     {% endif %}
   </main>
 {% endblock %}
