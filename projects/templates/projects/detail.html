@@ -30,29 +30,31 @@
     </section>
     <section class="template -second">
       <h2 class="main-title -second">Comentários</h2>
-      <ul>
+      <ul class="comments">
         <li class="comentar">
           <a href="{% url 'projects:comment' project.id %}" class="main-button">Comentar</a>
         </li>
         {% if project.comment_set.all %}
           {% for comment in project.comment_set.all %}
-            <li>
+            <li class="edit-comment">
               <figure>
                 <figcaption>
                   <strong>{{ comment.author }}</strong> ({{ comment.date|date:'d/m/Y' }})
                 </figcaption>
                 <blockquote>"{{ comment.text }}"</blockquote>
               </figure>
-              {% if user.is_authenticated and user.username == comment.author.username %}
-                <a href="{% url 'projects:comment_update' comment.id %}">Editar</a>
-              {% endif %}
-              {% if user.is_authenticated and user_belongs_to_moderators or user.username == comment.author.username %}
-                <button type="button" onclick="confirmDelete('{{ comment.id }}')">Apagar</button>
-                <form method="post" action="{% url 'projects:detail' project.id %}" class="delete-comment-form -comment-{{ comment.id }}">
-                  {% csrf_token %}
-                  <input type="hidden" name="delete_comment_id" value="{{ comment.id }}" />
-                </form>
-              {% endif %}
+              <div>
+                {% if user.is_authenticated and user.username == comment.author.username %}
+                  <a class="main-button" href="{% url 'projects:comment_update' comment.id %}">Editar</a>
+                {% endif %}
+                {% if user.is_authenticated and user_belongs_to_moderators or user.username == comment.author.username %}
+                  <button class="main-button" type="button" onclick="confirmDelete('{{ comment.id }}')">Apagar</button>
+                  <form method="post" action="{% url 'projects:detail' project.id %}" class="delete-comment-form -comment-{{ comment.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_comment_id" value="{{ comment.id }}" />
+                  </form>
+                {% endif %}
+              </div>
             </li>
           {% endfor %}
         {% else %}
