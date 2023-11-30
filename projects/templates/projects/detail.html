@@ -50,7 +50,7 @@
                 <button type="button" onclick="confirmDelete('{{ comment.id }}')">Apagar</button>
                 <form method="post" action="{% url 'projects:detail' project.id %}" class="delete-comment-form -comment-{{ comment.id }}">
                   {% csrf_token %}
-                  <input type="hidden" name="delete_comment_id" value="{{ comement.id }}" />
+                  <input type="hidden" name="delete_comment_id" value="{{ comment.id }}" />
                 </form>
               {% endif %}
             </li>

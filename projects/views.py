@@ -1,6 +1,6 @@
 from multiprocessing import context
 from typing import Any
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import generic
 from .models import Project, Comment, Category
@@ -24,8 +24,23 @@ class ProjectDetailView(generic.DetailView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["user_belongs_to_moderators"] = self.request.user.groups.filter(name="moderators").exists()
-        
+
         return context
+    
+    def post(self, request, pk):
+        project = get_object_or_404(Project, pk=pk)
+
+        # Check if the form is submitted for comment creation
+        if 'delete_comment_id' in request.POST:
+            comment_id = request.POST.get('delete_comment_id')
+            try:
+                comment = Comment.objects.get(pk=comment_id, project=project)
+                comment.delete()
+            except Comment.DoesNotExist:
+                # Handle the case where the comment does not exist
+                pass
+
+        return redirect('projects:detail', pk=project.pk)
 
 class ProjectListView(generic.ListView):
     model = Project
