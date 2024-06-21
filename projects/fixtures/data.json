@@ -1,0 +1,89 @@
+[
+    {
+        "model": "projects.project",
+        "pk": 1,
+        "fields": {
+            "name": "Rankedeco",
+            "release_date": "2023-11-24",
+            "project_url": "https://github.com/lucasmarques2803/Rankedeco",
+            "description": "Entrega final da disciplina PMR3304 - Sistemas de Informação; ministrada no segundo semestre de 2023. Consiste em um site para ranking de bandejões (restaurantes universitários) do campus Butantã da USP, com a utilização da ferramenta Django."
+        }
+    },
+    {
+        "model": "projects.project",
+        "pk": 2,
+        "fields": {
+            "name": "(De)codificador de Huffman",
+            "release_date": "2022-09-21",
+            "project_url": "https://github.com/lucasmarques2803/-De-Codificador-de-Huffman",
+            "description": "O projeto consiste em um algoritmo na linguagem Python, capaz de receber inputs direto do terminal ou arquivos .txt e, dependendo da escolha do usuário, codificar ou decodificar o input seguindo a \"Codificação de Huffman\"."
+        }
+    },
+    {
+        "model": "projects.project",
+        "pk": 3,
+        "fields": {
+            "name": "Gerador de Senha",
+            "release_date": "2023-04-19",
+            "project_url": "https://github.com/lucasmarques2803/password-generator",
+            "description": "O projeto foi feito para se familiarizar melhor com a linguagem JavaScript. Consiste em um site gerador de senha, com parâmetros definidos pelo usuário."
+        }
+    },
+    {
+        "model": "projects.project",
+        "pk": 4,
+        "fields": {
+            "name": "Mini Portfólio",
+            "release_date": "2022-10-15",
+            "project_url": "https://github.com/lucasmarques2803/mini-portfolio",
+            "description": "O projeto foi feito para se familiarizar com o básico das linguagens de Frontend, HTML5, CSS3 e JS. Consiste basicamente em um mini portfólio de uma pessoa genérica com algumas funcionalidades interessantes."
+        }
+    },
+    {
+        "model": "projects.project",
+        "pk": 5,
+        "fields": {
+            "name": "RFIDoor",
+            "release_date": "2024-06-20",
+            "project_url": "https://github.com/pedroazeredo04/RFIDoor",
+            "description": "O projeto consiste na automação da fechadura de uma porta, utilizando ESP32 e sensores de leitura RF ID. O projeto foi desenvolvido para a disciplina de Sistemas Embarcados, ministrada no segundo semestre de 2024. Segue uma arquitetura muito focada em orientação a objeto e design patterns, além de utilizar RTOS para operação em tempo real."
+        }
+    },
+    {
+        "model": "projects.category",
+        "pk": 1,
+        "fields": {
+            "name": "Lógica de Programação",
+            "description": "Aqui estão alguns projetos que envolvem mais fortemente a lógica de programação:",
+            "projects": [
+                2,
+                3,
+                5
+            ]
+        }
+    },
+    {
+        "model": "projects.category",
+        "pk": 2,
+        "fields": {
+            "name": "Desenvolvimento Web",
+            "description": "Aqui estão alguns projetos que envolvem mais fortemente o desenvolvimento web (Frontend/Backend/FullStack):",
+            "projects": [
+                1,
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "model": "projects.category",
+        "pk": 3,
+        "fields": {
+            "name": "Embarcados",
+            "description": "Aqui estão alguns projetos que envolvem mais fortemente sistemas embarcados:",
+            "projects": [
+                5
+            ]
+        }
+    }
+]
