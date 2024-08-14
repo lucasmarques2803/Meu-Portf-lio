@@ -50,6 +50,16 @@
         }
     },
     {
+        "model": "projects.project",
+        "pk": 6,
+        "fields": {
+            "name": "Projeto Integrador",
+            "release_date": "2024-08-14",
+            "project_url": "https://github.com/lucasmarques2803/PI7-Trajetoria-PC",
+            "description": "O projeto consiste em um sistema de geração de trajetória de um robô móvel. O projeto foi desenvolvido para a disciplina de Projeto Integrador 7, uma junção de quatro disciplinas ministradas no segundo semestre de 2024. Esta parte do projeto é responsável por gerar a trajetória do robô móvel por meio de código G, além de permitir o controle do robô com uma interface gráfica."
+        }
+    },
+    {
         "model": "projects.category",
         "pk": 1,
         "fields": {
@@ -58,7 +68,8 @@
             "projects": [
                 2,
                 3,
-                5
+                5,
+                6
             ]
         }
     },
@@ -82,7 +93,8 @@
             "name": "Embarcados",
             "description": "Aqui estão alguns projetos que envolvem mais fortemente sistemas embarcados:",
             "projects": [
-                5
+                5,
+                6
             ]
         }
     }
