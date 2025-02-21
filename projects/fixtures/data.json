@@ -60,6 +60,26 @@
         }
     },
     {
+        "model": "projects.project",
+        "pk": 7,
+        "fields": {
+            "name": "Réplica do Spotify",
+            "release_date": "2025-02-15",
+            "project_url": "https://github.com/lucasmarques2803/spotify-replication",
+            "description": "O projeto consiste em um clone full-stack do Spotify desenvolvido com tecnologias modernas da web, como React, Node.js, HTML/CSS, JavaScript, Express e MongoDB. Este projeto replica funcionalidades essenciais do Spotify, oferecendo uma experiência prática em desenvolvimento front-end e back-end."
+        }
+    },
+    {
+        "model": "projects.product",
+        "pk": 8,
+        "fields": {
+            "name": "Calculadora de Investimentos",
+            "release_date": "2025-02-21",
+            "project_url": "https://github.com/lucasmarques2803/investment-calculator",
+            "description": "O projeto consiste em uma aplicação web dinâmica para cálculo de investimentos, desenvolvida com HTML, CSS, JavaScript, Vite e TailwindCSS. Oferece controles interativos para valor inicial, aportes mensais, prazo, rentabilidade e impostos, além de gráficos (linhas/barras) e tabelas detalhadas para visualização dos resultados. Com design responsivo e interface mobile-friendly, a calculadora permite simular crescimento de investimentos com juros compostos e analisar o impacto tributário."
+        }
+    },
+    {
         "model": "projects.category",
         "pk": 1,
         "fields": {
@@ -77,12 +97,12 @@
         "model": "projects.category",
         "pk": 2,
         "fields": {
-            "name": "Desenvolvimento Web",
-            "description": "Aqui estão alguns projetos que envolvem mais fortemente o desenvolvimento web (Frontend/Backend/FullStack):",
+            "name": "Desenvolvimento Frontend",
+            "description": "Aqui estão alguns projetos que envolvem mais fortemente o desenvolvimento frontend:",
             "projects": [
-                1,
-                2,
-                4
+                3,
+                4,
+                8
             ]
         }
     },
@@ -95,6 +115,18 @@
             "projects": [
                 5,
                 6
+            ]
+        }
+    },
+    {
+        "model": "projects.category",
+        "pk": 4,
+        "fields": {
+            "name": "Desenvolvimento FullStack",
+            "description": "Aqui estão alguns projetos que envolvem mais fortemente o desenvolvimento FullStack:",
+            "projects": [
+                1,
+                7
             ]
         }
     }
