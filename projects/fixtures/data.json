@@ -70,7 +70,7 @@
         }
     },
     {
-        "model": "projects.product",
+        "model": "projects.project",
         "pk": 8,
         "fields": {
             "name": "Calculadora de Investimentos",
