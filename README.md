@@ -2,6 +2,8 @@
 
 🇺🇸 **EN** | [🇧🇷 **PT**](#meu-portf%C3%B3lio)
 
+[**View the Live Project: https://meu-portfolio-heir.onrender.com**](https://meu-portfolio-heir.onrender.com)
+
 Welcome to my personal portfolio! This repository contains a collection of projects developed using Django tools, showcasing my skills in web development and other technologies.
 
 ## Description
@@ -74,6 +76,8 @@ For more information or suggestions, please contact:
 # Meu Portfólio
 
 🇧🇷 **PT** | [🇺🇸 **EN**](#my-portfolio)
+
+[**Veja o Projeto Online: https://meu-portfolio-heir.onrender.com**](https://meu-portfolio-heir.onrender.com)
 
 Bem-vindo ao meu portfólio pessoal! Este repositório contém uma coleção de projetos desenvolvidos utilizando ferramentas do Django, demonstrando habilidades em desenvolvimento web e outras tecnologias.
 
